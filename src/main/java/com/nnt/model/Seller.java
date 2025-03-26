@@ -17,7 +17,7 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String sellerMan;
+    private String sellerName;
 
     private String mobile;
 

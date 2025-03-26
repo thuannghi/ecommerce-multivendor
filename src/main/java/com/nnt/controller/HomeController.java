@@ -1,6 +1,6 @@
 package com.nnt.controller;
 
-import com.nnt.response.APIResponse;
+import com.nnt.response.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     @GetMapping("/")
-    public APIResponse HomeControllerHandler() {
-        APIResponse apiResponse = new APIResponse();
+    public ApiResponse HomeControllerHandler() {
+        ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage("Welcome to Ecommerce Multivendor API response object");
         return apiResponse;
     }
