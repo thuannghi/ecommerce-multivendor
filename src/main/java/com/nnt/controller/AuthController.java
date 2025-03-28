@@ -3,6 +3,7 @@ package com.nnt.controller;
 import com.nnt.domain.USER_ROLE;
 import com.nnt.model.VerificationCode;
 import com.nnt.repository.UserRepository;
+import com.nnt.request.LoginOtpRequest;
 import com.nnt.request.LoginRequest;
 import com.nnt.response.ApiResponse;
 import com.nnt.response.AuthResponse;
@@ -37,8 +38,8 @@ public class AuthController {
     }
 
     @PostMapping("/send/login-signup-otp")
-    public ResponseEntity<ApiResponse> sendOtpHandler(@RequestBody VerificationCode req) throws Exception {
-        authService.sendLoginOtp(req.getEmail());
+    public ResponseEntity<ApiResponse> sendOtpHandler(@RequestBody LoginOtpRequest req) throws Exception {
+        authService.sendLoginOtp(req.getEmail(), req.getRole());
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage("OTP sent successfully!");
         return ResponseEntity.ok(apiResponse);

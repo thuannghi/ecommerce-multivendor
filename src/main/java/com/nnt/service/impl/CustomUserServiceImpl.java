@@ -27,20 +27,20 @@ public class CustomUserServiceImpl implements UserDetailsService {
     private final SellerRepository sellerRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (username.startsWith(SELLER_PREFIX)) {
-            String actualUserName = username.substring(SELLER_PREFIX.length());
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        if (userName.startsWith(SELLER_PREFIX)) {
+            String actualUserName = userName.substring(SELLER_PREFIX.length());
             Seller seller = sellerRepository.findByEmail(actualUserName);
             if (seller != null) {
                 return buildUserDetails(seller.getEmail(), seller.getPassword(), seller.getRole());
             }
         } else {
-            User user = userRepository.findByEmail(username);
+            User user = userRepository.findByEmail(userName);
             if (user != null) {
                 return buildUserDetails(user.getEmail(), user.getPassword(), user.getRole());
             }
         }
-        throw new UsernameNotFoundException("No user or seller found with email - " + username);
+        throw new UsernameNotFoundException("No user or seller found with email - " + userName);
     }
 
     private UserDetails buildUserDetails(String email, String password, USER_ROLE role) {

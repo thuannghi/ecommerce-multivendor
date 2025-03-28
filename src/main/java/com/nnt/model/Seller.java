@@ -43,6 +43,4 @@ public class Seller {
 
     private AccountStatus accountStatus = AccountStatus.PENDING_VERIFICATION;
 
-
-
 }

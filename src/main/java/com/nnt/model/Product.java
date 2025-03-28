@@ -38,7 +38,7 @@ public class Product {
     private int numRatings;
 
     @ManyToOne
-    private Category categoty;
+    private Category category;
 
     @ManyToOne
     private Seller seller;

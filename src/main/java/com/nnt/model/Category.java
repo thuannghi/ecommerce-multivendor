@@ -20,10 +20,10 @@ public class Category {
 
     @NotNull
     @Column(unique = true)
-    private String categoryID;
+    private String categoryId;
 
     @ManyToOne
-    private Category percentCategory;
+    private Category parentCategory;
 
     @NotNull
     private Integer level;

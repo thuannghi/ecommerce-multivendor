@@ -3,6 +3,7 @@ package com.nnt.service.impl;
 import com.nnt.config.JWTProvider;
 import com.nnt.domain.AccountStatus;
 import com.nnt.domain.USER_ROLE;
+import com.nnt.exception.SellerException;
 import com.nnt.model.Address;
 import com.nnt.model.Seller;
 import com.nnt.repository.AddressRepository;
@@ -54,8 +55,8 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public Seller getSellerById(Long id) throws Exception {
-        return sellerRepository.findById(id).orElseThrow(() -> new Exception("No seller was found with ID - " + id));
+    public Seller getSellerById(Long id) throws SellerException {
+        return sellerRepository.findById(id).orElseThrow(() -> new SellerException("No seller was found with ID - " + id));
     }
 
     @Override
