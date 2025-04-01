@@ -20,7 +20,7 @@ public interface ProductService {
 
     List<Product> searchProducts(String query);
 
-    Page<Product> getAllProducts(String category, String brand, String color, String sizes, Integer minPrice,
+    Page<Product> getAllProducts(String category, String brand, String colors, String sizes, Integer minPrice,
                                         Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber);
 
     List<Product> getProductBySellerId(Long sellerId);

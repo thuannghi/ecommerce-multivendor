@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         Category category3 = categoryRepository.findByCategoryId(req.getCategory3());
         if (category3 == null) {
             Category category = new Category();
-            category.setCategoryId(req.getCategory2());
+            category.setCategoryId(req.getCategory3());
             category.setLevel(3);
             category.setParentCategory(category2);
             category3 = categoryRepository.save(category);
