@@ -30,7 +30,8 @@ public class SellerProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request, @RequestHeader("Authorization") String jwt) throws Exception {
+    public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request,
+                                                 @RequestHeader("Authorization") String jwt) throws Exception {
         Seller seller = sellerService.getSellerProfile(jwt);
         Product product = productService.createProduct(request, seller);
         return new ResponseEntity<>(product, HttpStatus.CREATED);

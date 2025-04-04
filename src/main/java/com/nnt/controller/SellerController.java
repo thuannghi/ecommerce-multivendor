@@ -4,12 +4,14 @@ import com.nnt.config.JWTProvider;
 import com.nnt.domain.AccountStatus;
 import com.nnt.exception.SellerException;
 import com.nnt.model.Seller;
+import com.nnt.model.SellerReport;
 import com.nnt.model.VerificationCode;
 import com.nnt.repository.VerificationCodeRepository;
 import com.nnt.request.LoginRequest;
 import com.nnt.response.AuthResponse;
 import com.nnt.service.AuthService;
 import com.nnt.service.EmailService;
+import com.nnt.service.SellerReportService;
 import com.nnt.service.SellerService;
 import com.nnt.utils.OtpUtil;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,8 @@ public class SellerController {
     private final EmailService emailService;
 
     private final JWTProvider jwtProvider;
+
+    private final SellerReportService sellerReportService;
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> loginSeller(@RequestBody LoginRequest req) throws Exception {
@@ -84,13 +88,12 @@ public class SellerController {
         return new ResponseEntity<>(seller, HttpStatus.OK);
     }
 
-//    @GetMapping("/report")
-//    public ResponseEntity<SellerReport> getSellerReport(@RequestHeader("Authorization") String jwt) throws Exception {
-//        String email = jwtProvider.getEmailFromJWTToken(jwt);
-//        Seller seller = sellerService.getSellerByEmail(email);
-//        SellerReport sellerReport = sellerReportService.getSellerReport(seller);
-//        return new ResponseEntity<>(sellerReport, HttpStatus.OK);
-//    }
+    @GetMapping("/report")
+    public ResponseEntity<SellerReport> getSellerReport(@RequestHeader("Authorization") String jwt) throws Exception {
+        Seller seller = sellerService.getSellerProfile(jwt);
+        SellerReport sellerReport = sellerReportService.getSellerReport(seller);
+        return new ResponseEntity<>(sellerReport, HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<List<Seller>> getAllSellers(@RequestParam(required = false) AccountStatus status) {

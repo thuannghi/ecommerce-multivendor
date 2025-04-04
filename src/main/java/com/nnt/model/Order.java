@@ -22,12 +22,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String orderID;
+    private String orderId;
 
     @ManyToOne
     private User user;
 
-    private Long sellerID;
+    private Long sellerId;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();

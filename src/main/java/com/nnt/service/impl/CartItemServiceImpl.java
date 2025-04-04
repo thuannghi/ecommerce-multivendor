@@ -24,16 +24,25 @@ public class CartItemServiceImpl implements CartItemService {
             item.setSellingPrice(item.getQuantity() * item.getProduct().getSellingPrice());
             return cartItemRepository.save(item);
         }
-        throw new Exception("you can't update this cartItem");
+        throw new Exception("You can't update this cartItem");
+    }
+
+
+    @Override
+    public void removeCartItem(Long userId, Long cartItemId) throws Exception {
+        CartItem item = findCartItemById(cartItemId);
+        User cartItemUser = item.getCart().getUser();
+
+        if (cartItemUser.getId().equals(userId)) {
+            cartItemRepository.delete(item);
+        } else {
+            throw new Exception("You cannot delete this item");
+        }
+
     }
 
     @Override
-    public void RemoveCartItem(Long userId, Long cartItemId) {
-
-    }
-
-    @Override
-    public CartItem findCartItemById(Long id) {
-        return null;
+    public CartItem findCartItemById(Long id) throws Exception {
+        return cartItemRepository.findById(id).orElseThrow(() -> new Exception("Cart item was not found with ID - " + id));
     }
 }
