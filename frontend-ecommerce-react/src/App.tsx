@@ -1,12 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Button, ButtonBase, ThemeProvider } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Navbar from "./customer/components/Navbar/Navbar";
+import customeTheme from "./Theme/customeTheme";
 
 function App() {
   return (
-    <div className="">
-      <h1 className='font-bold text-2xl'>Code with NNT</h1>
-    </div>
+    <ThemeProvider theme={customeTheme}>
+      <div>
+        <Navbar />
+      </div>
+    </ThemeProvider>
   );
 }
 
