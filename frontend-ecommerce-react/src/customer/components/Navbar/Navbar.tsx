@@ -1,5 +1,13 @@
-import { Avatar, Box, Button, Icon, IconButton, useMediaQuery, useTheme } from "@mui/material";
-import React from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Icon,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -8,25 +16,48 @@ import {
   FavoriteBorder,
   Storefront,
 } from "@mui/icons-material";
+import CategorySheet from "./CategorySheet";
+import { mainCategory } from "../../../data/category/mainCategory";
 
 const Navbar = () => {
   const theme = useTheme();
-  const isLarge = useMediaQuery(theme.breakpoints.up("lg"))
+  const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
+  const [selectedCategory, setSelectedCategory] = useState("men");
+  const [showCategorySheet, setShowCategorySheet] = useState(false);
   return (
     <>
-      <Box>
+      <Box className="sticky top-0 left-0 right-0 bg-white" sx={{ zIndex: 2 }}>
         <div className="flex items-center justify-between px-5 lg:px-20 h-[70px] border-b">
-          <div>
+          <div className="flex items-center gap-9">
             <div className="flex items-center gap-2">
-              <IconButton>
-                <MenuIcon></MenuIcon>
-              </IconButton>
-              <h1 className="logo cursor-pointer text-lg md:text-2xl text-[#00927c]">
+              {!isLarge && (
+                <IconButton>
+                  <MenuIcon></MenuIcon>
+                </IconButton>
+              )}
+              <h1 className="logo cursor-pointer text-lg md:text-2xl text-primary-color">
                 General Tony
               </h1>
             </div>
+            <ul className="flex items-center font-medium text-gray-800">
+              {mainCategory.map((item) => (
+                <li
+                  onMouseLeave={() => {
+                    setShowCategorySheet(false);
+                  }}
+                  onMouseEnter={() => {
+                    setShowCategorySheet(true);
+                    setSelectedCategory(item.categoryId);
+                  }}
+                  className="minCatagory hover:text-primary-color hover:border-b-2 h-[70px] 
+                  px-4 border-primary-color flex items-center"
+                >
+                  {item.name}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className='flex gap-1 lg:gap-6 items-center'>
+          <div className="flex gap-1 lg:gap-6 items-center">
             <IconButton>
               <SearchIcon></SearchIcon>
             </IconButton>
@@ -51,11 +82,24 @@ const Navbar = () => {
                 sx={{ fontSize: 29 }}
               />
             </IconButton>
-            {isLarge && <Button startIcon={<Storefront />} variant="outlined">
-              Become Seller
-            </Button>}
+            {isLarge && (
+              <Button startIcon={<Storefront />} variant="outlined">
+                Become Seller
+              </Button>
+            )}
           </div>
         </div>
+        {showCategorySheet && <div
+          onMouseLeave={() => {
+            setShowCategorySheet(false);
+          }}
+          onMouseEnter={() => {
+            setShowCategorySheet(true);
+          }}
+          className="categorySheet absolute top-[4.41rem] left-20 right-20 border"
+        >
+          <CategorySheet selectedCategory={selectedCategory} />
+        </div>}
       </Box>
     </>
   );
