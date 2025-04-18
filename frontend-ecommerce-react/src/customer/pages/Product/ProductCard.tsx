@@ -47,7 +47,7 @@ const ProductCard = () => {
             />
           ))}
 
-          {
+          {isHover && (
             <div className="indicator flex flex-col items-center space-y-2">
               <div className="flex gap-3">
                 <Button variant="contained" color="secondary">
@@ -58,12 +58,12 @@ const ProductCard = () => {
                 </Button>
               </div>
             </div>
-          }
+          )}
         </div>
 
         <div className="details pt-3 space-y-1 group-hover-effect rounded-md">
           <div className="name">
-            <h1>Niky</h1>
+            <h1>Nike</h1>
             <p>Blue Shirt</p>
           </div>
           <div className="price flex items-center gap-3">

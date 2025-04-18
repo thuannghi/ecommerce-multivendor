@@ -40,7 +40,7 @@
 
 .group-hover-effect {
     padding: 1rem;
-    transition: transfom 0.3s;
+    transition: transform 0.3s;
 }
 
 .group:hover .group-hover-effect {
