@@ -6,7 +6,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import AddressCard from "./AddressCard";
 import AddressForm from "./AddressForm";
 import PricingCard from "../Cart/PricingCard";
@@ -40,6 +40,10 @@ const Checkout = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [paymentGateway, setPaymentGateway] = useState("RAZORPAY");
+  const handlePaymentChange = (event: any) => {
+    setPaymentGateway(event.target.value);
+  };
 
   return (
     <>
@@ -64,28 +68,39 @@ const Checkout = () => {
           </div>
 
           <div>
-            <div className="border rounded-md">
-              <div>
+            <div>
+              <div className="space-y-3 border p-5 rounded-md">
+                <h1 className="text-primary-color font-medium pb-2 text-center">
+                  Choose Payment Getway
+                </h1>
                 <RadioGroup
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
                   className="flex justify-between pr-0"
+                  onChange={handlePaymentChange}
+                  value={paymentGateway}
                 >
                   {paymentGatewayList.map((item) => (
                     <FormControlLabel
-                    className="border w-[45%]"
+                      className="border w-[45%] pr-2 rounded-md flex justify-center"
                       value={item.value}
                       control={<Radio />}
-                      label= {
-                        <img 
-                        className= {`${item.value === 'tripe' ? 'w-14' : ''} object-cover`}
-                        src={item.image} alt={item.label} />
+                      label={
+                        <img
+                          className={`${
+                            item.value === "tripe" ? "w-14" : ""
+                          } object-cover`}
+                          src={item.image}
+                          alt={item.label}
+                        />
                       }
                     />
                   ))}
                 </RadioGroup>
               </div>
+            </div>
+            <div className="border rounded-md">
               <PricingCard />
               <div className="p-5">
                 <Button fullWidth variant="contained" sx={{ py: "11px" }}>

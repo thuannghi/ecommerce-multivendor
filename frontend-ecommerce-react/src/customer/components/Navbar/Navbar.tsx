@@ -18,12 +18,15 @@ import {
 } from "@mui/icons-material";
 import CategorySheet from "./CategorySheet";
 import { mainCategory } from "../../../data/category/mainCategory";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const theme = useTheme();
   const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
   const [selectedCategory, setSelectedCategory] = useState("men");
   const [showCategorySheet, setShowCategorySheet] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <>
       <Box className="sticky top-0 left-0 right-0 bg-white" sx={{ zIndex: 2 }}>
@@ -35,7 +38,7 @@ const Navbar = () => {
                   <MenuIcon></MenuIcon>
                 </IconButton>
               )}
-              <h1 className="logo cursor-pointer text-lg md:text-2xl text-primary-color">
+              <h1 onClick={() => navigate("/")} className="logo cursor-pointer text-lg md:text-2xl text-primary-color">
                 General Tony
               </h1>
             </div>
@@ -62,7 +65,7 @@ const Navbar = () => {
               <SearchIcon></SearchIcon>
             </IconButton>
             {true ? (
-              <Button className="flex items-center gap-2">
+              <Button onClick={() => navigate("account/orders")} className="flex items-center gap-2">
                 <Avatar
                   sx={{ width: 29, height: 29 }}
                   src="https://avatars.githubusercontent.com/u/33619498?v=4"
@@ -76,14 +79,14 @@ const Navbar = () => {
             <IconButton>
               <FavoriteBorder sx={{ fontSize: 29 }} />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => navigate("/cart")}>
               <AddShoppingCart
                 className="text-gray-700"
                 sx={{ fontSize: 29 }}
               />
             </IconButton>
             {isLarge && (
-              <Button startIcon={<Storefront />} variant="outlined">
+              <Button onClick={() => navigate("become-seller")} startIcon={<Storefront />} variant="outlined">
                 Become Seller
               </Button>
             )}
