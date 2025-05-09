@@ -6,7 +6,7 @@ const rootReducer = combineReducers({});
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
 
 export type AppDispatch = typeof store.dispatch;
