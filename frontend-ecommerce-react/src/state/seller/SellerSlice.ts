@@ -11,7 +11,7 @@ export const fetchSellerProfile = createAsyncThunk(
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log("fetch seller profile", response);
+      console.log("fetch seller profile", response.data);
     } catch (error) {
       console.error("error - - -", error);
     }

@@ -14,7 +14,7 @@ const BecomeSeller = () => {
         {!isLogin ? <SellerAccountForm /> : <SellerLoginForm />}
 
         <div className="mt-10 space-y-2">
-            <h1 className="text-center text-sm font-medium">have account</h1>
+            <h1 className="text-center text-sm font-medium">Have an account?</h1>
             <Button onClick={handleShowPage} fullWidth sx={{py: "11px"}} variant="outlined">
                 {isLogin ? "Register" : "Login"}
             </Button>

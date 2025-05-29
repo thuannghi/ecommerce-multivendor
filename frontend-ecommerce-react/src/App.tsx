@@ -16,22 +16,18 @@ import SellerDashboard from "./seller/pages/sellerDashboard/SellerDashboard";
 import AdminDashboard from "./admin/pages/dashboard/AdminDashboard";
 import { useEffect } from "react";
 import { fetchProduct } from "./state/FetchProduct";
+import { useAppDispatch } from "./state/Store";
+import { fetchSellerProfile } from "./state/seller/SellerSlice";
 
 function App() {
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    fetchProduct()
+    dispatch(fetchSellerProfile(localStorage.getItem('jwt') || ''))
   }, []);
 
   return (
     <ThemeProvider theme={customeTheme}>
       <div>
-        {/* <Home /> */}
-        {/* <Product /> */}
-        {/* {<ProductDetail />} */}
-        {/* <Review /> */}
-        {/* <Cart /> */}
-        {/* <Checkout /> */}
-        {/* <Account /> */}
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
