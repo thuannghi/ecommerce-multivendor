@@ -1,8 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { thunk } from "redux-thunk";
+import sellerSlice from "./seller/SellerSlice";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  seller: sellerSlice,
+});
 
 const store = configureStore({
   reducer: rootReducer,

@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { api } from "../../config/Api";
 
@@ -12,8 +12,49 @@ export const fetchSellerProfile = createAsyncThunk(
         },
       });
       console.log("fetch seller profile", response.data);
+      return response.data;
     } catch (error) {
       console.error("error - - -", error);
     }
   }
 );
+
+interface SellerState {
+  sellers: any[];
+  selectedSeller: any;
+  profile: any;
+  report: any;
+  loading: boolean;
+  error: any;
+}
+
+const initialState: SellerState = {
+  sellers: [],
+  selectedSeller: null,
+  profile: null,
+  report: null,
+  loading: false,
+  error: null,
+};
+
+const sellerSlice = createSlice({
+  name: "seller",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchSellerProfile.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSellerProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.profile = action.payload;
+      })
+      .addCase(fetchSellerProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export default sellerSlice.reducer;
